@@ -1,0 +1,49 @@
+$mdc-theme-primary: #607D8B;
+$mdc-theme-secondary: #3F51B5;
+$mdc-theme-background: #ECEFF1;
+
+@import "~@material/theme/mdc-theme";
+
+body {
+  margin: 0px;
+  min-height: calc(100vh + 192px);
+  background-color: $mdc-theme-background;
+}
+
+.container {
+  display: flex;
+  margin-top: 64px;
+  flex-flow: row;
+}
+
+.content {
+  display: flex;
+  margin-top: 64px;
+  padding: 48px 16px;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.divider--horizontal {
+  display: block;
+  height: 1px;
+  margin: 16px 0;
+  border-top: 1px solid #37474F;
+}
+.divider--vertical {
+  display: inline-block;
+  height: 24px;
+  margin: 0 16px;
+  border-right: 1px solid #37474F;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+.text-small-caps {
+  font-variant: small-caps;
+}
+

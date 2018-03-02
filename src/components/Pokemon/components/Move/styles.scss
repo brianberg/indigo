@@ -1,0 +1,18 @@
+.pokemon-move {
+  display: flex;
+  flex: 1;
+  flex-flow: row nowrap;
+  align-items: center;
+  align-content: stretch;
+  line-height: normal;
+
+  .pokemon-type {
+    margin-right: 8px;
+    &>img {
+      padding: 0;
+    }
+  }
+  .pokemon-move__bars {
+    flex: 1;
+  }
+}

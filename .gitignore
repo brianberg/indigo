@@ -1,0 +1,17 @@
+# General
+dist
+
+# Data
+data/inventory
+data/player
+data/raw
+data/templates
+
+# Dependencies
+node_modules
+
+# Editors
+.vscode
+
+# OS
+.DS_Store

@@ -1,0 +1,17 @@
+.pokemon-stat {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  align-content: center;
+  
+  .pokemon-stat__label,
+  .pokemon-stat__value {
+    line-height: normal;
+  }
+
+  .pokemon-stat__label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: #78909C
+  }
+}

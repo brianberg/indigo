@@ -1,0 +1,12 @@
+.pokemon-type {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  
+  &> img {
+    padding: 0 3px;
+    &:not(:first-child) {
+      padding-left: 0px;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.app-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  .username {
+    margin: 0 24px;
+    font-weight: 400;
+    text-transform: none;
+    color: #FFF;
+  }
+}
