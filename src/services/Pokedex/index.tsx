@@ -1,13 +1,23 @@
 import * as pokedex from "../../../data/pokedex";
 
-export class PokedexService {
+export default class PokedexService {
 
-  entries : any = [];
+  private static instance : PokedexService;
 
-  constructor() {
-    for (let key in pokedex) {
-      this.entries.push(pokedex[key]);
+  private pokedex : any = pokedex;
+  private entries : any = [];
+
+  private constructor() {
+    for (let key in this.pokedex) {
+      this.entries.push(this.pokedex[key]);
     }
+  }
+
+  static getInstance() : PokedexService {
+    if (!PokedexService.instance) {
+      PokedexService.instance = new PokedexService();
+    }
+    return PokedexService.instance;
   }
 
   getAllEntries() : any {
@@ -15,7 +25,7 @@ export class PokedexService {
   }
 
   getPokemon(num : number) : any {
-    return pokedex[num];
+    return this.pokedex[num];
   }
 
 }

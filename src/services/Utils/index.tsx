@@ -1,6 +1,6 @@
-export class UtilService {
+export default class Utils {
 
-  calculateIV(pokemon : any) {
+  static calculateIV(pokemon : any) {
     return (
       pokemon.individual_attack +
       pokemon.individual_defense +

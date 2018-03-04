@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { PokedexService } from "../../services/Pokedex";
-import { LibraryService } from "../../services/Library";
-import { UtilService }    from "../../services/Utils";
+import PokedexService from "../../services/Pokedex";
+import LibraryService from "../../services/Library";
+import Utils          from "../../services/Utils";
 
 import { PokemonImage } from "../PokemonImage";
 import { Type }         from "./components/Type";
@@ -10,10 +10,6 @@ import { Stat }         from "./components/Stat";
 import { Move }         from "./components/Move";
 
 import "./styles.scss";
-
-const Pokedex = new PokedexService();
-const Library = new LibraryService();
-const Utils   = new UtilService();
 
 export class Pokemon extends React.Component<any, {}> {
 
@@ -39,23 +35,33 @@ export class Pokemon extends React.Component<any, {}> {
   // Resources
   // image : string;
 
+  // Services
+  pokedex       : PokedexService = PokedexService.getInstance();
+
   constructor(props : any) {
     super(props);
+
+    const Library      = LibraryService.getInstance();
+    const Pokedex      = PokedexService.getInstance();
     const data         = props.data;
+    
     this.id            = data.pokemon_id;
     this.cp            = data.cp;
     this.nickname      = data.nickname;
+    
     // IVs
     this.attack        = data.individual_attack;
     this.defense       = data.individual_defense;
     this.stamina       = data.individual_stamina;
     this.iv            = Utils.calculateIV(data);
+    
     // Pokedex info
     const dexEntry     = Pokedex.getPokemon(this.id);
     this.name          = dexEntry.name;
     this.identifier    = dexEntry.identifier;
     this.primaryType   = Library.getType(dexEntry.type);
     this.secondaryType = dexEntry.type_2 ? Library.getType(dexEntry.type_2) : null;
+    
     // Moves
     this.fastMove      = Library.getMove(data.move_1);
     this.chargeMove    = Library.getMove(data.move_2);

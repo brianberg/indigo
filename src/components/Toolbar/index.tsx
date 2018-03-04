@@ -1,15 +1,20 @@
 import * as React from "react";
 
-import { PlayerService } from "../../services/Player";
+import PlayerService from "../../services/Player";
 
 import "./styles.scss";
 
-const Player = new PlayerService();
-
 export class Toolbar extends React.Component<any, {}> {
 
+  player : any;
+
+  constructor(props : any) {
+    super(props);
+    const Player = PlayerService.getInstance();
+    this.player  = Player.get();
+  }
+
   render() {
-    const player = Player.get();
     return (
       <header className="app-toolbar mdc-toolbar mdc-elevation--z3">
         <div className="mdc-toolbar__row">
@@ -18,7 +23,7 @@ export class Toolbar extends React.Component<any, {}> {
           </section>
           <section className="mdc-toolbar__section mdc-toolbar__section--align-end">
             <button className="mdc-button username">
-             {player.username}
+             {this.player.username}
             </button>
           </section>
         </div>

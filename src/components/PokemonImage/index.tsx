@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { PokedexService } from "../../services/Pokedex";
+import PokedexService from "../../services/Pokedex";
 
-const Pokedex       = new PokedexService();
 const dirFlatImages = "./src/assets/pokemon/flat";
 const dir3dImages   = "http://www.pokemap.net/img/pokemon";
 
@@ -17,13 +16,15 @@ export class PokemonImage extends React.Component<any, {}> {
   constructor(props : any) {
     super(props);
     
-    this.id      = props.pokemonId;
-    this.pokemon = Pokedex.getPokemon(this.id);
-    this.height  = props.height || 96;
-    this.width   = props.width || 96;
+    const Pokedex = PokedexService.getInstance();
 
-    const length = this.id.toString().length;
-    this.number = length === 3 ?
+    this.id       = props.pokemonId;
+    this.pokemon  = Pokedex.getPokemon(this.id);
+    this.height   = props.height || 96;
+    this.width    = props.width || 96;
+
+    const length  = this.id.toString().length;
+    this.number   = length === 3 ?
       this.id.toString() : new Array(3 - length + 1).join('0') + this.id;
   }
 

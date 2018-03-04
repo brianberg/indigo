@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import * as Library from "../../../../../data/library";
+import LibraryService from "../../../../services/Library";
 
 import { Type } from "../Type";
 
@@ -13,8 +13,9 @@ export class Move extends React.Component<any, {}> {
 
   constructor(props : any) {
     super(props);
-    this.data = props.data;
-    this.type = Library.types[this.data.pokemon_type];
+    const Library = LibraryService.getInstance();
+    this.data     = props.data;
+    this.type     = Library.getType(this.data.pokemon_type);
   }
 
   render() {

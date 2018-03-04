@@ -1,6 +1,8 @@
 import * as inventory from "../../../data/inventory";
 
-export class InventoryService {
+export default class InventoryService {
+
+  private static instance : InventoryService;
 
   private candies       = inventory.candies;
   private eggIncubators = inventory.egg_incubators;
@@ -9,6 +11,15 @@ export class InventoryService {
   private player        = inventory.player;
   private pokedex       = inventory.pokedex;
   private pokemon       = inventory.pokemon;
+
+  private contructor() {}
+
+  static getInstance() : InventoryService {
+    if (!InventoryService.instance) {
+      InventoryService.instance = new InventoryService();
+    }
+    return InventoryService.instance;
+  }
 
   getCandies() : any[] {
     return this.candies;
