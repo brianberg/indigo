@@ -30,7 +30,7 @@ module.exports = {
     rules : [
       {
         test   : /\.tsx?$/,
-        loader : [ "react-hot-loader/webpack", "awesome-typescript-loader" ],
+        loader : [ "awesome-typescript-loader" ],
       },
       {
         test   : /\.(png|jpg|gif|svg)$/,

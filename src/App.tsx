@@ -17,6 +17,7 @@ export class App extends React.Component<any, {}> {
     return (
       <div className="app">
         <Toolbar />
+        <Sidebar />
         <div className="content">
           <PokemonList data={pokemon} />
         </div>

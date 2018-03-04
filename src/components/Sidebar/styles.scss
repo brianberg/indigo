@@ -1,0 +1,40 @@
+@import "../../colors.scss";
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  height: 100%;
+  flex-flow: column;
+  align-content: center;
+  align-items: stretch;
+  justify-content: center;
+  
+  .sidebar__content {
+    display: flex;
+    padding: 4px 12px;
+    flex-flow: column;
+    align-content: center;
+    align-items: center;
+    background-color: #FFF;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+
+    button.mdc-fab {
+      margin: 8px 0;
+      background-color: transparent;
+      box-shadow: none;
+      opacity: 0.5;
+
+      &.active {
+        border: 1px solid $teal;
+        opacity: 1;
+      }
+
+      i.material-icons {
+        font-size: 32px;
+      }
+    }
+  }
+}
