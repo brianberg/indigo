@@ -1,6 +1,4 @@
-$mdc-theme-primary: #607D8B;
-$mdc-theme-secondary: #3F51B5;
-$mdc-theme-background: #ECEFF1;
+@import "./colors.scss";
 
 @import "~@material/theme/mdc-theme";
 
@@ -45,5 +43,32 @@ body {
 }
 .text-small-caps {
   font-variant: small-caps;
+}
+
+// Icons
+svg.pokemon-icon {
+  height: 32px;
+  width: calc(74px / (99/32));
+  margin-left: 4px;
+  image {
+    height: 32px;
+    width: calc(74px / (99/32));
+  }
+}
+svg.pokedex-icon {
+  height: 32px;
+  width: calc(49px / (101/32));
+  image {
+    height: 32px;
+    width: calc(49px / (101/32));
+  }
+}
+svg.bag-icon {
+  height: 32px;
+  width: calc(82px / (96/32));
+  image {
+    height: 32px;
+    width: calc(82px / (96/32));
+  }
 }
 
