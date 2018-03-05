@@ -1,17 +1,4 @@
 .pokemon-list {
-  .mdc-grid-list {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    .mdc-grid-list__tiles {
-      width: 80%;
-      justify-content: center;
-      .mdc-grid-tile {
-        width: 296px;
-        margin: 16px;
-      }
-    }
-  }
   .mdc-menu-anchor {
     display: flex;
     position: fixed;

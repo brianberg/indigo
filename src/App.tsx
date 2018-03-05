@@ -2,9 +2,10 @@ import * as React from "react";
 
 import InventoryService from "./services/Inventory";
 
-import { Toolbar }     from "./components/Toolbar";
-import { Sidebar }     from "./components/Sidebar";
-import { PokemonList } from "./components/PokemonList";
+import { Toolbar }        from "./components/Toolbar";
+import { Sidebar }        from "./components/Sidebar";
+import { PokemonList }    from "./components/PokemonList";
+import { PokedexEntries } from "./components/PokedexEntries";
 
 import "./app.scss";
 
@@ -13,7 +14,7 @@ export class App extends React.Component<any, {}> {
   inventory : InventoryService = InventoryService.getInstance();
 
   state : any = {
-    state : "pokemon",
+    state : "pokedex",
   };
 
   goTo(key : string) {
@@ -36,7 +37,7 @@ export class App extends React.Component<any, {}> {
         <div className="content">
           {showPokemon && <PokemonList data={pokemon} />}
           {showItems && <div>Items</div>}
-          {showPokedex && <div>Pokedex</div>}
+          {showPokedex && <PokedexEntries />}
         </div>
       </div>
     );

@@ -45,6 +45,20 @@ body {
   font-variant: small-caps;
 }
 
+.mdc-grid-list {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  .mdc-grid-list__tiles {
+    width: 90%;
+    justify-content: center;
+    .mdc-grid-tile {
+      width: 296px;
+      margin: 16px;
+    }
+  }
+}
+
 // Icons
 svg.pokemon-icon {
   height: 32px;
