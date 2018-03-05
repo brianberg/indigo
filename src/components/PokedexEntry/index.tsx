@@ -104,7 +104,7 @@ export class PokedexEntry extends React.Component<any, {}> {
     // Moves
     const createMoveElement = (move : any) => {
       return (
-        <div key={move.id} className="pokemon__content--move mdc-typography--subheading1">
+        <div key={move.movement_id} className="pokemon__content--move mdc-typography--subheading1">
           <Move data={move} />
         </div>
       )

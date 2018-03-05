@@ -14,9 +14,11 @@
   "dependencies": {
     "@types/react": "^16.0.36",
     "@types/react-dom": "^16.0.3",
+    "@types/react-router-dom": "^4.2.4",
     "material-components-web": "^0.30.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.4.1",

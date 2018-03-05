@@ -1,4 +1,5 @@
-import * as React from "react";
+import * as React                       from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import InventoryService from "./services/Inventory";
 
@@ -13,33 +14,25 @@ export class App extends React.Component<any, {}> {
 
   inventory : InventoryService = InventoryService.getInstance();
 
-  state : any = {
-    state : "pokedex",
-  };
-
-  goTo(key : string) {
-    this.setState({
-      state : key,
-    });
-  }
-
   render() {
     const pokemon = this.inventory.getPokemon();
-    const showPokemon = this.state.state === "pokemon";
-    const showItems   = this.state.state === "items";
-    const showPokedex = this.state.state === "pokedex";
+    const Pokemon = () => <PokemonList data={pokemon} />;
+    const Items   = () => <div>Items</div>;
+    const Pokedex = () => <PokedexEntries />;
     return (
-      <div className="app">
-        <Toolbar />
-        <Sidebar
-            selected={this.state.state}
-            handleClick={(key : string) => this.goTo(key)} />
-        <div className="content">
-          {showPokemon && <PokemonList data={pokemon} />}
-          {showItems && <div>Items</div>}
-          {showPokedex && <PokedexEntries />}
+      <BrowserRouter>
+        <div className="app">
+          <Toolbar />
+          <Sidebar />
+          <div className="content">
+            <Switch>
+              <Route path="/pokemon" component={Pokemon} />
+              <Route path="/items"   component={Items} />
+              <Route path="/pokedex" component={Pokedex} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }

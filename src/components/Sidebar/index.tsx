@@ -1,4 +1,5 @@
 import * as React  from "react";
+import { NavLink } from "react-router-dom";
 
 import "./styles.scss";
 
@@ -35,39 +36,24 @@ export class Sidebar extends React.Component<any, {}> {
     },
   };
 
-  state : any = {
-    selected : "pokemon"
-  }
-
-  constructor(props : any) {
-    super(props);
-    if (props.selected) {
-      this.state.selected = props.selected;
-    }
-  }
-
-  onClick(key : string) {
-    this.setState({
-      selected : key,
-    });
-    this.props.handleClick(key);
-  }
-
   render() {
     let items = []
     for (let key in this.items) {
       let item = this.items[key];
-      let classes = "mdc-fab";
-      if (key == this.state.selected) classes += " active";
       items.push(
-        <button
+        <NavLink
             key={key}
-            className={classes}
-            aria-label={item.label}
-            onClick={() => this.onClick(key)}
-            >
-          <span className="mdc-fab__icon">{item.icon}</span>
-        </button>
+            to={`/${key}`}
+            className="sidebar-link"
+            activeClassName="active">
+          <button
+              key={key}
+              className="sidebar-link__button mdc-fab"
+              aria-label={item.label}
+              >
+            <span className="mdc-fab__icon">{item.icon}</span>
+          </button>
+        </NavLink>
       );
     }
     return (

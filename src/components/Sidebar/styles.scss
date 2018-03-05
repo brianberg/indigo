@@ -21,19 +21,24 @@
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
 
-    button.mdc-fab {
-      margin: 8px 0;
-      background-color: transparent;
-      box-shadow: none;
+    a.sidebar-link {
       opacity: 0.5;
 
       &.active {
-        border: 1px solid $teal;
         opacity: 1;
+        button.mdc-fab {
+          border: 1px solid $teal;
+        }
       }
 
-      i.material-icons {
-        font-size: 32px;
+      button.mdc-fab.sidebar-link__button {
+        margin: 8px 0;
+        background-color: transparent;
+        box-shadow: none;
+
+        i.material-icons {
+          font-size: 32px;
+        }
       }
     }
   }
