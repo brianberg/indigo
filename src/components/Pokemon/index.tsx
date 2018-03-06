@@ -32,9 +32,6 @@ export class Pokemon extends React.Component<any, {}> {
   fastMove      : any;
   chargeMove    : any;
 
-  // Resources
-  // image : string;
-
   constructor(props : any) {
     super(props);
 

@@ -16,7 +16,7 @@ export class PokedexEntry extends React.Component<any, {}> {
   number          : string;
   name            : string;
   identifier      : string;
-  rarity          : number;
+  buddyDistance   : number;
 
   primaryType     : any;
   secondaryType   : any;
@@ -25,7 +25,6 @@ export class PokedexEntry extends React.Component<any, {}> {
   chargeMoves     : any;
 
   candyToEvolve   : number;
-  buddyDistance   : number;
 
   // Stats
   baseAttack      : number;
@@ -46,7 +45,7 @@ export class PokedexEntry extends React.Component<any, {}> {
     this.id              = data.id;
     this.name            = data.name;
     this.identifier      = data.identifier;
-    this.rarity          = data.rarity;
+    this.buddyDistance   = data.km_buddy_distance;
 
     const length         = this.id.toString().length;
     this.number          = length === 3 ?
@@ -61,9 +60,6 @@ export class PokedexEntry extends React.Component<any, {}> {
     const moveSort       = (a : any, b : any) => a.power - b.power;
     this.fastMoves       = data.quick_moves.map(getMoveData).sort(moveSort);
     this.chargeMoves     = data.cinematic_moves.map(getMoveData).sort(moveSort);
-   
-    this.candyToEvolve   = data.candy_to_evolve;
-    this.buddyDistance   = data.km_buddy_distance;
     
     // Stats
     const stats          = data.stats;
