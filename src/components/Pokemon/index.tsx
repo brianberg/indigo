@@ -35,9 +35,6 @@ export class Pokemon extends React.Component<any, {}> {
   // Resources
   // image : string;
 
-  // Services
-  pokedex       : PokedexService = PokedexService.getInstance();
-
   constructor(props : any) {
     super(props);
 

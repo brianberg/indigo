@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import PokedexService from "../../services/pokedex";
+import PokedexService from "../../services/Pokedex";
 
 import { PokedexEntry } from "../PokedexEntry";
 
