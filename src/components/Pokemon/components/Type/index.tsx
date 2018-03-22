@@ -29,7 +29,7 @@ export class Type extends React.Component<any, {}> {
 
     function buildIconElement(type : any, size : number) {
       if (!type) return null;
-      const imageSrc = `./src/assets/types/type_${type.name}.png`;
+      const imageSrc = `./assets/types/type_${type.name}.png`;
       return (
         <img key={type.attack_type}
              src={imageSrc}

@@ -14,7 +14,7 @@ export class Sidebar extends React.Component<any, {}> {
       label : "Pokemon",
       icon  : (
         <svg className="pokemon-icon">       
-          <image xlinkHref="./src/assets/pokemon.svg" />    
+          <image xlinkHref="./assets/pokemon.svg" />    
         </svg>
       )
     },
@@ -22,7 +22,7 @@ export class Sidebar extends React.Component<any, {}> {
       label : "Items",
       icon  : (
         <svg className="bag-icon">       
-          <image xlinkHref="./src/assets/bag.svg" />    
+          <image xlinkHref="./assets/bag.svg" />    
         </svg>
       )
     },
@@ -30,7 +30,7 @@ export class Sidebar extends React.Component<any, {}> {
       label : "Pokedex",
       icon  : (
         <svg className="pokedex-icon">       
-          <image xlinkHref="./src/assets/pokedex.svg" />    
+          <image xlinkHref="./assets/pokedex.svg" />    
         </svg>
       )
     },

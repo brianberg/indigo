@@ -2,7 +2,7 @@ import * as React from "react";
 
 import PokedexService from "../../services/Pokedex";
 
-const dirFlatImages = "./src/assets/pokemon/flat";
+const dirFlatImages = "./assets/pokemon/flat";
 const dir3dImages   = "http://www.pokemap.net/img/pokemon";
 
 export class PokemonImage extends React.Component<any, {}> {
