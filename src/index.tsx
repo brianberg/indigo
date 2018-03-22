@@ -3,7 +3,16 @@ import * as ReactDOM from "react-dom";
 
 import { App }       from "./App";
 
-ReactDOM.render(
-  <App />,
-  document.getElementById("root")
-);
+render();
+
+// TODO add hot loader support
+// if (module.hot) {
+//   module.hot.accept("./App", render);
+// }
+
+function render() {
+  ReactDOM.render(
+    <App />,
+    document.getElementById("root")
+  );
+}

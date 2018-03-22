@@ -1,29 +1,42 @@
 const path    = require("path");
+const glob    = require("glob");
 const webpack = require("webpack");
+
 // Plugins
-const CleanWebpackPlugin       = require("clean-webpack-plugin");
-const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+const CleanWebpackPlugin        = require("clean-webpack-plugin");
+const CopyWebpackPlugin         = require("copy-webpack-plugin");
+const ExtractTextWebpackPlugin  = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin         = require("html-webpack-plugin");
+const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
+const WriteFilePlugin           = require("write-file-webpack-plugin");
+
+// const extractAppStyles    = new ExtractTextWebpackPlugin("[name].[hash].css");
+// const extractVendorStyles = new ExtractTextWebpackPlugin("vendor.[hash].css");
 
 module.exports = {
-  entry  : {
-    app : "./src/index.tsx",
-  },
+  entry  : [
+    // TODO add hot loader support
+    // "react-hot-loader/patch",
+    // "webpack/hot/only-dev-server",
+    "./src/index.tsx",
+  ],
   output : {
-    filename : "bundle.js",
+    filename : "[name].[hash].js",
     path     : path.join(__dirname, "dist"),
   },
 
   // Enable souremaps for debugging webpack's output
   devtool   : "source-map",
   devServer : {
-    contentBase        : __dirname,
+    contentBase        : path.join(__dirname, "dist"),
     historyApiFallback : true,
-    hot                : true,
+    // TODO add hot loader support
+    // hot             : true,
   },
 
   resolve : {
     // Add '.ts' and '.tsx' as resolvable extensions
-    extensions : [ ".ts", ".tsx", ".js", ".json" ],
+    extensions : [ ".ts", ".tsx", ".js" ],
   },
 
   module : {
@@ -37,11 +50,50 @@ module.exports = {
         loader : "file-loader",
       },
       {
-        test : /\.scss$/,
-        use  : ExtractTextWebpackPlugin.extract({
-          use      : [ "css-loader", "sass-loader" ],
+        test    : /\.scss$/,
+        include : path.join(__dirname, "src"),
+        use     : ExtractTextWebpackPlugin.extract({
+          use      : [
+            "css-loader",
+            {
+              loader  : "sass-loader",
+              options : {
+                includePaths : ['node_modules', 'node_modules/@material/*']
+                  .map((d) => path.join(__dirname, d))
+                  .map((g) => glob.sync(g))
+                  .reduce((a, c) => a.concat(c), []),
+                importer : function(url, prev) {
+                  if(url.indexOf("~@material") === 0) {
+                    const filePath = url.split("~@material")[1];
+                    const nodeModulePath = `./node_modules/@material/${filePath}`;
+                    return { file : path.resolve(nodeModulePath) };
+                  }
+                  return { file : url };
+                }
+              }
+            }
+          ],
           fallback : "style-loader",
         }),
+      },
+      {
+        test    : /\.scss$/,
+        include : path.join(__dirname, "node_modules"),
+        use     : [
+          {
+            loader: "sass-loader",
+            options: {
+              importer: function(url, prev) {
+                if(url.indexOf("~@material") === 0) {
+                  const filePath = url.split("~@material")[1];
+                  const nodeModulePath = `./node_modules/@material/${filePath}`;
+                  return { file : path.resolve(nodeModulePath) };
+                }
+                return { file : url };
+              }
+            }
+          }
+        ]
       },
       // All output '.js' files will have any sourcemaps
       // re-processed by 'source-map-loader'.
@@ -52,16 +104,40 @@ module.exports = {
         loader  : "source-map-loader",
       },
     ],
-    loaders : [
-      {
-        test    : /\.json$/,
-        loader  : "json",
-      },
-    ],
   },
   
   plugins : [
-    new ExtractTextWebpackPlugin("styles.css"),
+    new CleanWebpackPlugin(["dist"]),
+
+    // TODO add hot loader support
+    // new webpack.HotModuleReplacementPlugin(),
+    
+    new webpack.NamedModulesPlugin(),
+    
+    new webpack.optimize.CommonsChunkPlugin({
+      name      : "vendor",
+      minChunks : Infinity,
+    }),
+    
+    new ExtractTextWebpackPlugin("[name].[hash].css"),
+    
+    new HtmlWebpackPlugin({
+      template          : "./index.html",
+      alwaysWriteToDisk : true,
+    }),
+    
+    new HtmlWebpackHarddiskPlugin(),
+    
+    new CopyWebpackPlugin([
+      {
+        context : "src/assets",
+        from    : "**/*",
+        to      : "assets",
+        ignore  : ["styles/**/*"]
+      }
+    ]),
+    
+    new WriteFilePlugin(),
   ],
 
   // When importing a module whose path matches one of the following, just
@@ -69,8 +145,8 @@ module.exports = {
   // This is important because it allows us to avoid bundling all of our
   // dependencies, which allows browsers to cache those libraries
   // between builds
-  externals : {
-    "react"     : "React",
-    "react-dom" : "ReactDOM",
-  },
+  // externals : {
+  //   "react"     : "React",
+  //   "react-dom" : "ReactDOM",
+  // },
 }
