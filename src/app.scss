@@ -2,6 +2,7 @@
 
 @import "~@material/theme/mdc-theme";
 @import "~@material/typography/mdc-typography";
+@import "~@material/elevation/mdc-elevation";
 
 body {
   margin: 0px;
@@ -46,20 +47,6 @@ body {
   font-variant: small-caps;
 }
 
-.mdc-grid-list {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  .mdc-grid-list__tiles {
-    width: 90%;
-    justify-content: center;
-    .mdc-grid-tile {
-      width: 296px;
-      margin: 16px;
-    }
-  }
-}
-
 // Icons
 svg.pokemon-icon {
   height: 32px;
@@ -86,4 +73,24 @@ svg.bag-icon {
     width: calc(82px / (96/32));
   }
 }
+
+// Elevated Stats
+.elevated-stats {
+  display: flex;
+  height: 32px;
+  flex-flow: row;
+  justify-content: space-between;
+  .elevated-stats__stat {
+    @extend .mdc-elevation--z2;
+    border-radius: 16px;
+    background-color: #fff;
+  }
+  .elevated-stats__text {
+    padding: 0 8px;
+    line-height: 32px;
+    font-weight: 500;
+    color: #455A64;
+  }
+}
+
 

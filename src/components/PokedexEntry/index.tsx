@@ -3,6 +3,7 @@ import * as React from "react";
 import LibraryService from "../../services/Library";
 
 import { PokemonImage } from "../PokemonImage";
+import { BarStat }      from "../BarStat";
 // TODO move these up
 import { Type }         from "../Pokemon/components/Type";
 import { Stat }         from "../Pokemon/components/Stat";
@@ -16,8 +17,18 @@ export class PokedexEntry extends React.Component<any, {}> {
   number          : string;
   name            : string;
   identifier      : string;
-  buddyDistance   : number;
 
+  buddyDistance   : number;
+  avgHeight       : number;
+  avgWeight       : number;
+  
+  // TODO
+  // region          : string;
+  // species         : string;
+  // habitat         : string;
+  // description     : string; 
+
+  description     : string; 
   primaryType     : any;
   secondaryType   : any;
 
@@ -45,7 +56,16 @@ export class PokedexEntry extends React.Component<any, {}> {
     this.id              = data.id;
     this.name            = data.name;
     this.identifier      = data.identifier;
+
     this.buddyDistance   = data.km_buddy_distance;
+    this.avgHeight       = data.pokedex_height_m;
+    this.avgWeight       = data.pokedex_weight_kg;
+
+    // TODO
+    // this.region          = data.region || "???";
+    // this.species         = data.species || "???";
+    // this.habitat         = data.habitat || "???";
+    // this.description     = data.flavor_text || "???";
 
     const length         = this.id.toString().length;
     this.number          = length === 3 ?
@@ -75,73 +95,100 @@ export class PokedexEntry extends React.Component<any, {}> {
   }
 
   render() {
-    // Stats
-    const statItems = [
-      {
-        label : "Capture Rate",
-        value : ('' + Math.floor(this.baseCaptureRate * 100) + '%'),
-      }, {
-        label : "Flee Rate",
-        value : ('' + Math.floor(this.baseFleeRate * 100) + '%'),
-      }, {
-        label : "Buddy Distance",
-        value : ('' + this.buddyDistance + " km"),
-      },
-    ];
-    const stats = statItems.map((item : any, index: number) => {
+    const createStatElement = (item : any, index : number) => {
       return (
         <div key={index} className="pokedex-stat">
           <span className="pokedex-stat__label">{item.label}</span>
           <span className="pokedex-stat__value">{item.value}</span>
         </div>
-      )
-    });
-
-    // Moves
+      );
+    };
     const createMoveElement = (move : any) => {
       return (
-        <div key={move.movement_id} className="pokemon__content--move mdc-typography--subheading1">
+        <div key={move.movement_id} className="mdc-typography--subheading1">
           <Move data={move} />
         </div>
       )
     };
+
+    // Average Size
+    const generalStats = [
+      {
+        label: "Type",
+        value: (
+          <Type primary={this.primaryType} secondary={this.secondaryType} />
+        )
+      }, {
+        label : "Height",
+        value : `${this.avgHeight.toFixed(1)} m`,
+      }, {
+        label : "Weight",
+        value : `${this.avgWeight.toFixed(1)} kg`,
+      }
+    ].map(createStatElement);
+
+    // Encounter stats
+    const encounterStats = [
+      {
+        label : "Capture Rate",
+        value : `${Math.floor(this.baseCaptureRate * 100)}%`,
+      }, {
+        label : "Flee Rate",
+        value : `${Math.floor(this.baseFleeRate * 100)}%`,
+      }, {
+        label : "Buddy Distance",
+        value : `${this.buddyDistance} km`,
+      },
+    ].map(createStatElement);
+
+    // Moves
     const fastMoves   = this.fastMoves.map(createMoveElement);
     const chargeMoves = this.chargeMoves.map(createMoveElement);
 
     return (
-      <div className="pokemon mdc-elevation--z1">
-        <div className="pokemon__main-stats">
-          <div className="pokemon__main-stats--type mdc-elevation--z2">
-            <Type primary={this.primaryType} secondary={this.secondaryType} />
+      <div className="pokedex-entry mdc-elevation--z1">
+        <div className="pokemon-overview">
+          <div className="pokemon-image">
+            <PokemonImage pokemonId={this.id}/>
           </div>
-          <div className="pokemon__main-stats--cp mdc-elevation--z2 mdc-typography--subheading1">
-            #{this.number}
+          <div className="mdc-card pokemon-info">
+            <h2 className="pokemon-name">
+              {this.name}
+              <small className="pokemon-number">
+                #{this.number}
+              </small>
+            </h2>
           </div>
         </div>
-        <div className="pokemon__media">
-          <PokemonImage pokemonId={this.id} />
-        </div>
-        <div className="mdc-card pokemon__content">
-          <h2 className="pokemon__content--name mdc-typography--title">
-            {this.name}
-          </h2>
-          <div className="pokemon__content--ivs">
-            <Stat label="Attack" value={this.baseAttack} />
-            <div className="divider--vertical"></div>
-            <Stat label="Defense" value={this.baseDefense} />
-            <div className="divider--vertical"></div>
-            <Stat label="Stamina" value={this.baseStamina} />
+        <div className="mdc-card pokemon-details">
+          <div className="pokemon-base-stats">
+            <BarStat name="Attack" value={this.baseAttack} max={300} />
+            <BarStat name="Defense" value={this.baseDefense} max={300} />
+            <BarStat name="Stamina" value={this.baseStamina} max={300} />
           </div>
-          <div className="pokedex-stats">
-            {stats}
-          </div>
-          <div className="pokedex-moves">
-            <h3 className="mdc-typography--subheading2">Fast Moves</h3>
-            {fastMoves}
-          </div>
-          <div className="pokedex-moves">
-            <h3 className="mdc-typography--subheading2">Charge Moves</h3>
-            {chargeMoves}
+          <div className="mdc-grid-list">
+            <ul className="mdc-grid-list__tiles">
+              <li className="mdc-grid-tile">
+                <h3>General</h3>
+                {generalStats}
+              </li>
+              <li className="mdc-grid-tile">
+                <h3>Encounter</h3>
+                {encounterStats}
+              </li>
+              <li className="mdc-grid-tile">
+                <div className="pokedex-moves">
+                  <h3>Fast Moves</h3>
+                  {fastMoves}
+                </div>
+              </li>
+              <li className="mdc-grid-tile">
+                <div className="pokedex-moves">
+                  <h3>Charge Moves</h3>
+                  {chargeMoves}
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

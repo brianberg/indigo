@@ -16,17 +16,11 @@ export class PokedexEntries extends React.Component<any, {}> {
 
   render() {
     const entries = this.entries.map((entry) => {
-      return (
-        <li key={entry.id} className="mdc-grid-tile">
-          <PokedexEntry data={entry} />
-        </li>
-      );
+      return <PokedexEntry key={entry.id} data={entry} />;
     });
     return (
-      <div className="pokemon-list">
-        <div className="mdc-grid-list">
-          <ul className="mdc-grid-list__tiles">{entries}</ul>
-        </div>
+      <div className="pokedex">
+        {entries}
       </div>
     )
   }
