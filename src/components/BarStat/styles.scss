@@ -1,0 +1,31 @@
+@import "~@material/typography/mdc-typography";
+@import "~@material/linear-progress/mdc-linear-progress";
+
+.bar-stat {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+
+  .bar-stat__name {
+    flex: 20%;
+    margin-right: 16px;
+  }
+  .bar-stat__bar.mdc-linear-progress {
+    display: inline-block;
+    height: 8px;
+    
+    .mdc-linear-progress__buffer,
+    .mdc-linear-progress__bar,
+    .mdc-linear-progress__bar-inner {
+      border-radius: 4px;
+    }
+    .mdc-linear-progress__bar {
+      transform: none;
+    }
+  }
+  .bar-stat__value {
+    @extend .mdc-typography--caption;
+    margin-left: 8px;
+    text-align: right;
+  }
+}
