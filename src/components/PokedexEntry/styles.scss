@@ -23,84 +23,112 @@
   flex-flow: row;
   align-items: center;
 }
-
-.pokedex {
-  flex: 0.8;
-  color: #455A64;
   
-  .pokedex-entry {
+.pokedex-entry {
+  color: #455A64;
+  display: flex;
+  margin: 16px;
+  flex-flow: row;
+  
+  .mdc-card {
+    background-color: #FFFFFF;
+    border-radius: 6px;
+  }
+  
+  .pokemon-overview {
     display: flex;
-    margin: 16px;
-    padding: 8px;
-    flex-flow: row;
+    flex: 30%;
+    flex-flow: column;
+    justify-content: flex-end;
     background-color: #B0BEC5;
     border-radius: 6px;
-    
-    .mdc-card {
-      margin: 8px;
-      background-color: #FFFFFF;
-      border-radius: 6px;
-    }
-    
-    .pokemon-overview {
-      display: flex;
-      flex: 30%;
-      flex-flow: column;
-      justify-content: flex-end;
 
-      .pokemon-image {
-        display: flex;
-        flex-flow: row;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        margin-top: 32px;
-        z-index: 2;
-      }
-      .pokemon-info {
-        margin-top: -16px;
-        padding: 16px;
+    .pokemon-image {
+      display: flex;
+      flex-flow: row;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      margin-top: 32px;
+      z-index: 2;
+    }
+    .pokemon-info {
+      flex: 1;
+      margin-top: -16px;
+      padding: 16px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      
+      h2.pokemon-name {
+        @extend .mdc-typography--title;
         text-align: center;
-        
-        h2.pokemon-name {
-          @extend .mdc-typography--title;
-          margin-bottom: 0px;
-        }
         .pokemon-number {
           color: #B0BEC5;
         }
       }
+      h3 {
+        @extend .mdc-typography--subheading1;
+        margin: 0;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+      .pokedex-desc {
+        margin-top: 8px;
+      }
+      .pokedex-habitat {
+        margin-top: 16px;
+      }
     }
-    .pokemon-details {
-      flex: 70%;
-      display: flex;
-      flex-flow: column;
+  }
+  .pokedex-details {
+    flex: 70%;
+    display: flex;
+    flex-flow: column;
+    margin-left: 8px;
 
-      .pokemon-base-stats {
-        padding: 16px;
+    .pokedex-stats {
+      @extend .mdc-card;
+      margin: 0 8px 8px;
+      
+      .pokedex-stats__base {
+        margin-top: 16px;
+        padding: 0 16px;
       }
       .bar-stat {
         margin-bottom: 8px;
       }
-      .mdc-grid-list {
-        .mdc-grid-list__tiles {
-          .mdc-grid-tile {
-            flex: 40%;
-            margin: 16px;
-            h3 {
-              @extend .mdc-typography--subheading2;
-              @extend .mdc-typography--adjust-margin;
-              font-weight: 500;
-            }
+      .mdc-grid-tile {
+        margin: 16px;
+      }
+    }
+
+    .pokedex-moves {
+      margin-bottom: -8px;
+      .mdc-grid-tile {
+        @extend .mdc-card;
+        margin: 8px;
+        padding: 16px;
+      }
+    }
+    
+    .mdc-grid-list {
+      .mdc-grid-list__tiles {
+        .mdc-grid-tile {
+          flex: 40%;
+          h3 {
+            @extend .mdc-typography--body1;
+            @extend .mdc-typography--adjust-margin;
+            font-weight: 500;
+            text-transform: uppercase;
           }
         }
       }
     }
-    .pokedex-moves {
-      flex: 1;
-      .pokemon-move {
-        margin: 8px 0;
-      }
+  }
+  .pokedex-moves {
+    flex: 1;
+    .pokemon-move {
+      margin: 8px 0;
     }
   }
 }

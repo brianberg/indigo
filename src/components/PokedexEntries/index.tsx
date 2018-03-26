@@ -4,6 +4,8 @@ import PokedexService from "../../services/Pokedex";
 
 import { PokedexEntry } from "../PokedexEntry";
 
+import "./styles.scss";
+
 export class PokedexEntries extends React.Component<any, {}> {
 
   entries : any[];

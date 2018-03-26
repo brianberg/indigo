@@ -1,1 +1,7 @@
 @import "~@material/grid-list/mdc-grid-list";
+
+.pokedex {
+  display: flex;
+  flex: 0.8;
+  flex-flow: column;
+}

@@ -22,13 +22,11 @@ export class PokedexEntry extends React.Component<any, {}> {
   avgHeight       : number;
   avgWeight       : number;
   
-  // TODO
-  // region          : string;
-  // species         : string;
-  // habitat         : string;
-  // description     : string; 
+  region          : string;
+  habitat         : string;
+  species         : string;
+  flavorText      : string; 
 
-  description     : string; 
   primaryType     : any;
   secondaryType   : any;
 
@@ -61,11 +59,10 @@ export class PokedexEntry extends React.Component<any, {}> {
     this.avgHeight       = data.pokedex_height_m;
     this.avgWeight       = data.pokedex_weight_kg;
 
-    // TODO
-    // this.region          = data.region || "???";
-    // this.species         = data.species || "???";
-    // this.habitat         = data.habitat || "???";
-    // this.description     = data.flavor_text || "???";
+    this.region          = data.region || "Unknown";
+    this.habitat         = data.habitat || "No data found";
+    this.species         = data.species || "Unknown";
+    this.flavorText      = data.flavor_text || "No data found";
 
     const length         = this.id.toString().length;
     this.number          = length === 3 ?
@@ -146,7 +143,7 @@ export class PokedexEntry extends React.Component<any, {}> {
     const chargeMoves = this.chargeMoves.map(createMoveElement);
 
     return (
-      <div className="pokedex-entry mdc-elevation--z1">
+      <div className="pokedex-entry">
         <div className="pokemon-overview">
           <div className="pokemon-image">
             <PokemonImage pokemonId={this.id}/>
@@ -158,37 +155,51 @@ export class PokedexEntry extends React.Component<any, {}> {
                 #{this.number}
               </small>
             </h2>
+            <div className="pokedex-desc">
+              <h3>{this.species}</h3>
+              <div>{this.flavorText}</div>
+            </div>
+            <div className="pokedex-habitat">
+              <h3>{this.region}</h3>
+              <div>{this.habitat}</div>
+            </div>
           </div>
         </div>
-        <div className="mdc-card pokemon-details">
-          <div className="pokemon-base-stats">
-            <BarStat name="Attack" value={this.baseAttack} max={300} />
-            <BarStat name="Defense" value={this.baseDefense} max={300} />
-            <BarStat name="Stamina" value={this.baseStamina} max={300} />
+        <div className="pokedex-details">
+          <div className="pokedex-stats">
+            <div className="pokedex-stats__base">
+              <BarStat name="Attack" value={this.baseAttack} max={300} />
+              <BarStat name="Defense" value={this.baseDefense} max={300} />
+              <BarStat name="Stamina" value={this.baseStamina} max={300} />
+            </div>
+            <div className="mdc-grid-list">
+              <ul className="mdc-grid-list__tiles">
+                <li className="mdc-grid-tile">
+                  {generalStats}
+                </li>
+                <li className="mdc-grid-tile">
+                  {encounterStats}
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="mdc-grid-list">
-            <ul className="mdc-grid-list__tiles">
-              <li className="mdc-grid-tile">
-                <h3>General</h3>
-                {generalStats}
-              </li>
-              <li className="mdc-grid-tile">
-                <h3>Encounter</h3>
-                {encounterStats}
-              </li>
-              <li className="mdc-grid-tile">
-                <div className="pokedex-moves">
-                  <h3>Fast Moves</h3>
-                  {fastMoves}
-                </div>
-              </li>
-              <li className="mdc-grid-tile">
-                <div className="pokedex-moves">
-                  <h3>Charge Moves</h3>
-                  {chargeMoves}
-                </div>
-              </li>
-            </ul>
+          <div className="pokedex-moves">
+            <div className="mdc-grid-list">
+              <ul className="mdc-grid-list__tiles">
+                <li className="mdc-grid-tile">
+                  <div className="pokedex-moves">
+                    <h3>Fast Moves</h3>
+                    {fastMoves}
+                  </div>
+                </li>
+                <li className="mdc-grid-tile">
+                  <div className="pokedex-moves">
+                    <h3>Charge Moves</h3>
+                    {chargeMoves}
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
