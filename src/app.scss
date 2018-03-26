@@ -80,6 +80,7 @@ svg.bag-icon {
   height: 32px;
   flex-flow: row;
   justify-content: space-between;
+  
   .elevated-stats__stat {
     @extend .mdc-elevation--z2;
     border-radius: 16px;

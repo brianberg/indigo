@@ -63,12 +63,12 @@ export class Pokemon extends React.Component<any, {}> {
 
   render() {
     return (
-      <div className="pokemon mdc-elevation--z1">
-        <div className="pokemon__main-stats">
-          <div className="pokemon__main-stats--type mdc-elevation--z2">
+      <div className="pokemon">
+        <div className="elevated-stats">
+          <div className="elevated-stats__stat">
             <Type primary={this.primaryType} secondary={this.secondaryType} />
           </div>
-          <div className="pokemon__main-stats--cp mdc-elevation--z2 mdc-typography--subheading1">
+          <div className="elevated-stats__stat elevated-stats__text mdc-typography--subheading1">
             <span className="mdc-typography--caption">CP</span>{this.cp}
           </div>
         </div>
