@@ -4,10 +4,9 @@ import LibraryService from "../../services/Library";
 
 import { PokemonImage } from "../PokemonImage";
 import { BarStat }      from "../BarStat";
-// TODO move these up
-import { Type }         from "../Pokemon/components/Type";
-import { Stat }         from "../Pokemon/components/Stat";
-import { Move }         from "../Pokemon/components/Move";
+import { PokemonType }  from "../PokemonType";
+import { PokemonStat }         from "../PokemonStat";
+import { PokemonMove }         from "../PokemonMove";
 
 import "./styles.scss";
 
@@ -35,7 +34,7 @@ export class PokedexEntry extends React.Component<any, {}> {
 
   candyToEvolve   : number;
 
-  // Stats
+  // PokemonStats
   baseAttack      : number;
   baseDefense     : number;
   baseStamina     : number;
@@ -78,7 +77,7 @@ export class PokedexEntry extends React.Component<any, {}> {
     this.fastMoves       = data.quick_moves.map(getMoveData).sort(moveSort);
     this.chargeMoves     = data.cinematic_moves.map(getMoveData).sort(moveSort);
     
-    // Stats
+    // PokemonStats
     const stats          = data.stats;
     this.baseAttack      = stats.base_attack;
     this.baseDefense     = stats.base_defense;
@@ -92,7 +91,7 @@ export class PokedexEntry extends React.Component<any, {}> {
   }
 
   render() {
-    const createStatElement = (item : any, index : number) => {
+    const createPokemonStatElement = (item : any, index : number) => {
       return (
         <div key={index} className="pokedex-stat">
           <span className="pokedex-stat__label">{item.label}</span>
@@ -103,17 +102,17 @@ export class PokedexEntry extends React.Component<any, {}> {
     const createMoveElement = (move : any) => {
       return (
         <div key={move.movement_id} className="mdc-typography--subheading1">
-          <Move data={move} />
+          <PokemonMove data={move} />
         </div>
       )
     };
 
     // Average Size
-    const generalStats = [
+    const generalPokemonStats = [
       {
         label: "Type",
         value: (
-          <Type primary={this.primaryType} secondary={this.secondaryType} />
+          <PokemonType primary={this.primaryType} secondary={this.secondaryType} />
         )
       }, {
         label : "Height",
@@ -122,10 +121,10 @@ export class PokedexEntry extends React.Component<any, {}> {
         label : "Weight",
         value : `${this.avgWeight.toFixed(1)} kg`,
       }
-    ].map(createStatElement);
+    ].map(createPokemonStatElement);
 
     // Encounter stats
-    const encounterStats = [
+    const encounterPokemonStats = [
       {
         label : "Capture Rate",
         value : `${Math.floor(this.baseCaptureRate * 100)}%`,
@@ -136,7 +135,7 @@ export class PokedexEntry extends React.Component<any, {}> {
         label : "Buddy Distance",
         value : `${this.buddyDistance} km`,
       },
-    ].map(createStatElement);
+    ].map(createPokemonStatElement);
 
     // Moves
     const fastMoves   = this.fastMoves.map(createMoveElement);
@@ -175,10 +174,10 @@ export class PokedexEntry extends React.Component<any, {}> {
             <div className="mdc-grid-list">
               <ul className="mdc-grid-list__tiles">
                 <li className="mdc-grid-tile">
-                  {generalStats}
+                  {generalPokemonStats}
                 </li>
                 <li className="mdc-grid-tile">
-                  {encounterStats}
+                  {encounterPokemonStats}
                 </li>
               </ul>
             </div>

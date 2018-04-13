@@ -2,7 +2,7 @@ import * as React from "react";
 
 import "./styles.scss";
 
-export class Stat extends React.Component<any, {}> {
+export class PokemonStat extends React.Component<any, {}> {
 
   render() {
     return (

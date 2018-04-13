@@ -2,7 +2,7 @@ import * as React from "react";
 
 import "./styles.scss";
 
-export class Type extends React.Component<any, {}> {
+export class PokemonType extends React.Component<any, {}> {
 
   size      : number = 24;
   primary   : any;

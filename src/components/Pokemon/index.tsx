@@ -5,9 +5,9 @@ import LibraryService from "../../services/Library";
 import Utils          from "../../services/Utils";
 
 import { PokemonImage } from "../PokemonImage";
-import { Type }         from "./components/Type";
-import { Stat }         from "./components/Stat";
-import { Move }         from "./components/Move";
+import { PokemonType }  from "../PokemonType";
+import { PokemonStat }         from "../PokemonStat";
+import { PokemonMove }         from "../PokemonMove";
 
 import "./styles.scss";
 
@@ -66,7 +66,7 @@ export class Pokemon extends React.Component<any, {}> {
       <div className="pokemon">
         <div className="elevated-stats">
           <div className="elevated-stats__stat">
-            <Type primary={this.primaryType} secondary={this.secondaryType} />
+            <PokemonType primary={this.primaryType} secondary={this.secondaryType} />
           </div>
           <div className="elevated-stats__stat elevated-stats__text mdc-typography--subheading1">
             <span className="mdc-typography--caption">CP</span>{this.cp}
@@ -80,17 +80,17 @@ export class Pokemon extends React.Component<any, {}> {
             {this.name}
           </h2>
           <div className="pokemon__content--ivs">
-            <Stat label="Attack" value={this.attack} />
+            <PokemonStat label="Attack" value={this.attack} />
             <div className="divider--vertical"></div>
-            <Stat label="Defense" value={this.defense} />
+            <PokemonStat label="Defense" value={this.defense} />
             <div className="divider--vertical"></div>
-            <Stat label="Stamina" value={this.stamina} />
+            <PokemonStat label="Stamina" value={this.stamina} />
           </div>
           <div className="pokemon__content--move mdc-typography--subheading1">
-            <Move data={this.fastMove} />
+            <PokemonMove data={this.fastMove} />
           </div>
           <div className="pokemon__content--move mdc-typography--subheading1">
-            <Move data={this.chargeMove} />
+            <PokemonMove data={this.chargeMove} />
           </div>
         </div>
       </div>

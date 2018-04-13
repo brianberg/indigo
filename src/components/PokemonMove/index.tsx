@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import LibraryService from "../../../../services/Library";
+import LibraryService from "../../services/Library";
 
-import { Type } from "../Type";
+import { PokemonType } from "../PokemonType";
 
 import "./styles.scss";
 
-export class Move extends React.Component<any, {}> {
+export class PokemonMove extends React.Component<any, {}> {
 
   data : any;
   type : any;
@@ -21,7 +21,7 @@ export class Move extends React.Component<any, {}> {
   render() {
     return (
       <div className="pokemon-move">
-        <Type primary={this.type} height={18}/>
+        <PokemonType primary={this.type} height={18}/>
         <span className="pokemon-move__name">{this.data.name}</span>
         <span className="pokemon-move__bars"></span>
         <span className="pokemon-move__power">{this.data.power}</span>
