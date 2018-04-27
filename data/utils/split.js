@@ -17,7 +17,7 @@ function splitInventory(inventory) {
     inventory_upgrades : [],
     applied_items      : [],
     egg_incubators     : [],
-    candies            : [],
+    candies            : {},
     quests             : []
   };
 
@@ -59,7 +59,8 @@ function splitInventory(inventory) {
         ret.egg_incubators = ret.egg_incubators.concat(incubators);
       }
       if (data.candy) {
-        ret.candies.push(data.candy);
+        const candy = data.candy;
+        ret.candies[candy.family_id] = candy.candy;
       }
       if (data.quest) {
         ret.quests.push(data.quest);
