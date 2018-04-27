@@ -6,12 +6,73 @@ module.exports = {
 }
 
 function splitInventory(inventory) {
-  // TODO
-  return {};
+  const ret = {
+    pokemon            : [],
+    removed_pokemon    : [],
+    items              : [],
+    pokedex            : {},
+    player             : null,
+    currency           : [],
+    camera             : null,
+    inventory_upgrades : [],
+    applied_items      : [],
+    egg_incubators     : [],
+    candies            : [],
+    quests             : []
+  };
+
+  if (!inventory || !inventory.inventory_delta ||
+      !inventory.inventory_delta.inventory_items) {
+    return ret;
+  }
+
+  for (let item of inventory.inventory_delta.inventory_items) {
+    if (item.inventory_item_data) {
+      const data = item.inventory_item_data;
+      if (data.pokemon_data) {
+        ret.pokemon.push(data.pokemon_data);
+      }
+      if (data.item) {
+        ret.items.push(data.item);
+      }
+      if (data.pokedex_entry) {
+        const entry = data.pokedex_entry;
+        ret.pokedex[entry.pokemon_id] = entry;
+      }
+      if (data.player_stats) {
+        ret.player = data.player_stats;
+      }
+      if (data.player_currency) {
+        ret.currency.push(data.player_currency);
+      }
+      if (data.player_camera) {
+        ret.camera = data.player_camera;
+      }
+      if (data.inventory_upgrades) {
+        ret.inventory_upgrades.push(data.inventory_upgrades);
+      }
+      if (data.applied_items) {
+        ret.applied_items.push(data.applied_items);
+      }
+      if (data.egg_incubators) {
+        const incubators = data.egg_incubators.egg_incubator || [];
+        ret.egg_incubators = ret.egg_incubators.concat(incubators);
+      }
+      if (data.candy) {
+        ret.candies.push(data.candy);
+      }
+      if (data.quest) {
+        ret.quests.push(data.quest);
+      }
+    }
+    if (item.deleted_item && item.deleted_item.pokemon_id) {
+      ret.removed_pokemon.push(item.deleted_item.pokemon_id);
+    }
+  }
+  return ret;
 }
 
 function splitItemTemplates(templates) {
-  if (!templates || !templates.item_templates) return {};
 
   const ret = {
       pokemon_settings         : [],
@@ -31,9 +92,10 @@ function splitItemTemplates(templates) {
       pokemon_upgrade_settings : null,
       equipped_badge_settings  : null
   };
+  
+  if (!templates || !templates.item_templates) return {};
 
   for (let template of templates.item_templates) {
-  // templates.item_templates.forEach(template => {
     const id        = template.template_id;
     const typeRegex = /^POKEMON_TYPE_(.*)/;
     if (template.pokemon_settings) {

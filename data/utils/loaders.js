@@ -20,7 +20,7 @@ module.exports = {
 }
 
 function loadInventory(done) {
-  const inventory = Utils.splitInventory(rawInventory);
+  const inventory = split.inventory(rawInventory);
   const output    = path.join(__dirname, "..", "inventory");
   
   inventory.eggs = findInventoryEggs(inventory);
