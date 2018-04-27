@@ -60,7 +60,7 @@ export class PokedexEntry extends React.Component<any, {}> {
 
     this.region          = data.region || "Unknown";
     this.habitat         = data.habitat || "No data found";
-    this.species         = data.species || "Unknown";
+    this.species         = data.species ? `${data.species} Pokemon` : "Unknown";
     this.flavorText      = data.flavor_text || "No data found";
 
     const length         = this.id.toString().length;
