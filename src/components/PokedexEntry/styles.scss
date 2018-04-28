@@ -103,12 +103,26 @@
     }
 
     .pokedex-moves {
-      margin-bottom: -8px;
       .mdc-grid-tile {
         @extend .mdc-card;
         margin: 8px;
         padding: 16px;
       }
+      .pokedex-moves__list {
+        flex: 1;
+        .pokemon-move {
+          margin: 8px 0;
+        }
+      }
+    }
+
+    .pokedex-evolution {
+      @extend .mdc-card;
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+      margin: 8px 8px 0;
+      padding: 16px;
     }
     
     .mdc-grid-list {
@@ -123,12 +137,6 @@
           }
         }
       }
-    }
-  }
-  .pokedex-moves {
-    flex: 1;
-    .pokemon-move {
-      margin: 8px 0;
     }
   }
 }

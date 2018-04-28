@@ -72,13 +72,21 @@ function loadPokedex(done) {
       return done(err);
     }
     const pokedex = require(filepath);
+    const families = {};
     const { pokemon_settings } = split.itemTemplates(rawTemplates);
     for (let item of pokemon_settings) {
-      let id = item.pokemon_id;
-      let pokemon = pokedex[id];
+      const id = item.pokemon_id;
+      const familyId = item.family_id;
+      const pokemon = pokedex[id];
       pokedex[id] = Object.assign(pokemon, item);
+      let family = families[familyId];
+      if (!family) family = [];
+      family.push(pokemon);
+      families[familyId] = family;
     }
-    createFile(filepath, pokedex, false, done);
+    const evolutions = buildEvolutions(families);
+    const output = path.join(__dirname, "..", "pokedex");
+    createModule({ pokemon : pokedex, families : evolutions }, output, done);
   });
 }
 
@@ -121,6 +129,41 @@ function loadRegions(done) {
       createFile(filepath, pokedex, false, (err) => done(err, filepath));
     }
   }
+}
+
+function buildEvolutions(families) {
+  console.log("building evolution tracks...");
+  const evolutions = {};
+  const evolveSort = (a, b) => a.candy_to_evolve - b.candy_to_evolve;
+  for (let key in families) {
+    const family = families[key];
+    // Build evolution tracks
+    const tracks = [];
+    for (let pokemon of family.sort(evolveSort)) {
+      const id        = parseInt(pokemon.id);
+      const branches  = pokemon.evolution_branch;
+      // Iterate through each evolution branch
+      for (let i in branches) {
+        const branch = branches[i];
+        // Initialize the tracks
+        if (!tracks[i]) {
+          tracks[i] = [
+            Object.assign({}, { id }, branch),
+          ];
+          continue;
+        }
+        // Iterate through the tracks and add the evolution to the
+        // track that has the from pokemon as the latest evolution
+        for (let track of tracks) {
+          if (track[track.length-1].evolution === id) {
+            track.push(Object.assign({}, { id }, branch));
+          }
+        }
+      }
+    }
+    evolutions[key] = tracks;
+  }
+  return evolutions;
 }
 
 function findInventoryEggs(inventory) {

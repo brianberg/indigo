@@ -1,18 +1,21 @@
 import * as React from "react";
 
-import LibraryService from "../../services/Library";
+import LibraryService   from "../../services/Library";
+import InventoryService from "../../services/Inventory";
 
-import { PokemonImage } from "../PokemonImage";
-import { BarStat }      from "../BarStat";
-import { PokemonType }  from "../PokemonType";
-import { PokemonStat }         from "../PokemonStat";
-import { PokemonMove }         from "../PokemonMove";
+import { PokemonImage }     from "../PokemonImage";
+import { BarStat }          from "../BarStat";
+import { PokemonType }      from "../PokemonType";
+import { PokemonStat }      from "../PokemonStat";
+import { PokemonMove }      from "../PokemonMove";
+import { PokemonEvolution } from "../PokemonEvolution";
 
 import "./styles.scss";
 
 export class PokedexEntry extends React.Component<any, {}> {
 
   id              : number;
+  familyId        : number;
   number          : string;
   name            : string;
   identifier      : string;
@@ -51,6 +54,7 @@ export class PokedexEntry extends React.Component<any, {}> {
     const data           = props.data;
     
     this.id              = data.id;
+    this.familyId        = data.family_id;
     this.name            = data.name;
     this.identifier      = data.identifier;
 
@@ -186,19 +190,22 @@ export class PokedexEntry extends React.Component<any, {}> {
             <div className="mdc-grid-list">
               <ul className="mdc-grid-list__tiles">
                 <li className="mdc-grid-tile">
-                  <div className="pokedex-moves">
+                  <div className="pokedex-moves__list">
                     <h3>Fast Moves</h3>
                     {fastMoves}
                   </div>
                 </li>
                 <li className="mdc-grid-tile">
-                  <div className="pokedex-moves">
+                  <div className="pokedex-moves__list">
                     <h3>Charge Moves</h3>
                     {chargeMoves}
                   </div>
                 </li>
               </ul>
             </div>
+          </div>
+          <div className="pokedex-evolution">
+            <PokemonEvolution familyId={this.familyId} />
           </div>
         </div>
       </div>

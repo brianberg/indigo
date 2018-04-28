@@ -4,12 +4,13 @@ export default class PokedexService {
 
   private static instance : PokedexService;
 
-  private pokedex : any = pokedex;
-  private entries : any = [];
+  private pokemon  : any = pokedex.pokemon;
+  private families : any = pokedex.families;
+  private entries  : any = [];
 
   private constructor() {
-    for (let key in this.pokedex) {
-      this.entries.push(this.pokedex[key]);
+    for (let key in this.pokemon) {
+      this.entries.push(this.pokemon[key]);
     }
   }
 
@@ -25,7 +26,11 @@ export default class PokedexService {
   }
 
   getPokemon(num : number) : any {
-    return this.pokedex[num];
+    return this.pokemon[num];
+  }
+
+  getFamily(num : number) : any[] {
+    return this.families[num];
   }
 
 }
