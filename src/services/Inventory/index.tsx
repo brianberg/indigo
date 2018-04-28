@@ -21,7 +21,8 @@ export default class InventoryService {
     return InventoryService.instance;
   }
 
-  getCandies() : any[] {
+  getCandies(id : number = null) : any {
+    if (id) return this.candies[id];
     return this.candies;
   }
 
@@ -40,9 +41,9 @@ export default class InventoryService {
   getPlayer() : any {
     return this.player;
   }
-  getPokedex(skip : number = 0, limit : number = null) : any[] {
-    if (limit) return this.pokedex.slice(skip, skip + limit);
-    return this.pokedex.slice(skip, this.pokemon.length);
+  getPokedex(id : number = null) : any {
+    if (id) return this.pokedex[id];
+    return this.pokedex;
   }
 
   getPokemon(skip : number = 0, limit : number = null) : any[] {
