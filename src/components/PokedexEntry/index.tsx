@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import LibraryService   from "../../services/Library";
-import InventoryService from "../../services/Inventory";
 
 import { PokemonImage }     from "../PokemonImage";
 import { BarStat }          from "../BarStat";
@@ -27,15 +26,13 @@ export class PokedexEntry extends React.Component<any, {}> {
   region          : string;
   habitat         : string;
   species         : string;
-  flavorText      : string; 
+  flavorText      : string;
 
   primaryType     : any;
   secondaryType   : any;
 
   fastMoves       : any;
   chargeMoves     : any;
-
-  candyToEvolve   : number;
 
   // PokemonStats
   baseAttack      : number;
@@ -53,7 +50,7 @@ export class PokedexEntry extends React.Component<any, {}> {
     const Library        = LibraryService.getInstance();
     const data           = props.data;
     
-    this.id              = data.id;
+    this.id              = parseInt(data.id);
     this.familyId        = data.family_id;
     this.name            = data.name;
     this.identifier      = data.identifier;
@@ -151,25 +148,25 @@ export class PokedexEntry extends React.Component<any, {}> {
           <div className="pokemon-image">
             <PokemonImage pokemonId={this.id}/>
           </div>
-          <div className="mdc-card pokemon-info">
+          <div className="pokemon-info">
             <h2 className="pokemon-name">
               {this.name}
               <small className="pokemon-number">
                 #{this.number}
               </small>
             </h2>
-            <div className="pokedex-desc">
+            <div className="pokedex-info__section">
               <h3>{this.species}</h3>
               <div>{this.flavorText}</div>
             </div>
-            <div className="pokedex-habitat">
+            <div className="pokedex-info__section">
               <h3>{this.region}</h3>
               <div>{this.habitat}</div>
             </div>
           </div>
         </div>
         <div className="pokedex-details">
-          <div className="pokedex-stats">
+          <div className="pokedex-card pokedex-stats">
             <div className="pokedex-stats__base">
               <BarStat name="Attack" value={this.baseAttack} max={300} />
               <BarStat name="Defense" value={this.baseDefense} max={300} />
@@ -186,7 +183,7 @@ export class PokedexEntry extends React.Component<any, {}> {
               </ul>
             </div>
           </div>
-          <div className="pokedex-moves">
+          <div className="pokedex-card pokedex-moves">
             <div className="mdc-grid-list">
               <ul className="mdc-grid-list__tiles">
                 <li className="mdc-grid-tile">
@@ -204,8 +201,9 @@ export class PokedexEntry extends React.Component<any, {}> {
               </ul>
             </div>
           </div>
-          <div className="pokedex-evolution">
-            <PokemonEvolution familyId={this.familyId} />
+          <div className="pokedex-card pokedex-evolution">
+            <h3>Family</h3>
+            <PokemonEvolution familyId={this.familyId} highlight={this.id} />
           </div>
         </div>
       </div>

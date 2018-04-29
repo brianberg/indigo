@@ -53,6 +53,7 @@
       z-index: 2;
     }
     .pokemon-info {
+      @extend .mdc-card;
       flex: 1;
       margin-top: -16px;
       padding: 16px;
@@ -72,11 +73,11 @@
         font-weight: 500;
         text-transform: uppercase;
       }
-      .pokedex-desc {
-        margin-top: 8px;
-      }
-      .pokedex-habitat {
-        margin-top: 16px;
+      .pokedex-info__section {
+        margin-bottom: 16px;
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -85,6 +86,15 @@
     display: flex;
     flex-flow: column;
     margin-left: 8px;
+
+    .pokedex-card {
+      h3 {
+        @extend .mdc-typography--body1;
+        @extend .mdc-typography--adjust-margin;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+    }
 
     .pokedex-stats {
       @extend .mdc-card;
@@ -119,8 +129,6 @@
     .pokedex-evolution {
       @extend .mdc-card;
       display: flex;
-      flex-flow: row;
-      justify-content: center;
       margin: 8px 8px 0;
       padding: 16px;
     }
@@ -129,12 +137,6 @@
       .mdc-grid-list__tiles {
         .mdc-grid-tile {
           flex: 40%;
-          h3 {
-            @extend .mdc-typography--body1;
-            @extend .mdc-typography--adjust-margin;
-            font-weight: 500;
-            text-transform: uppercase;
-          }
         }
       }
     }
