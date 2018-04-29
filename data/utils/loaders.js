@@ -134,7 +134,17 @@ function loadRegions(done) {
 function buildEvolutions(families) {
   console.log("building evolution tracks...");
   const evolutions = {};
-  const evolveSort = (a, b) => a.candy_to_evolve - b.candy_to_evolve;
+  const evolveSort = (a, b) => {
+    let aCandy = a.candy_to_evolve;
+    let bCandy = b.candy_to_evolve;
+    if (a.evolution_branch.length) {
+      aCandy = a.evolution_branch[0].candy_cost;
+    }
+    if (b.evolution_branch.length) {
+      bCandy = b.evolution_branch[0].candy_cost;
+    }
+    return aCandy - bCandy;
+  }
   for (let key in families) {
     const family = families[key];
     // Build evolution tracks

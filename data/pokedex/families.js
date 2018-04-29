@@ -255,6 +255,13 @@ module.exports = {
   "41": [
     [
       {
+        "id": 41,
+        "evolution": 42,
+        "evolution_item_requirement": 0,
+        "candy_cost": 25,
+        "km_buddy_distance_requirement": 0
+      },
+      {
         "id": 42,
         "evolution": 169,
         "evolution_item_requirement": 0,
@@ -687,6 +694,13 @@ module.exports = {
   "116": [
     [
       {
+        "id": 116,
+        "evolution": 117,
+        "evolution_item_requirement": 0,
+        "candy_cost": 25,
+        "km_buddy_distance_requirement": 0
+      },
+      {
         "id": 117,
         "evolution": 230,
         "evolution_item_requirement": 1104,
@@ -1033,13 +1047,6 @@ module.exports = {
   ],
   "183": [
     [
-      {
-        "id": 298,
-        "evolution": 183,
-        "evolution_item_requirement": 0,
-        "candy_cost": 25,
-        "km_buddy_distance_requirement": 0
-      },
       {
         "id": 183,
         "evolution": 184,
