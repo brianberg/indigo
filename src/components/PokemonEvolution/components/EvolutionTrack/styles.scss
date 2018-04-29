@@ -1,16 +1,40 @@
+@import "../../../../colors.scss";
+
 .evolution-track {
   display: flex;
   flex-flow: row;
   justify-content: center;
-  padding: 8px;
+  align-items: center;
+
+  &:not(:first-child) {
+    margin-top: 16px;
+  }
+
+  .highlight {
+    background-color: $mdc-theme-background;
+    border-radius: 6px;
+  }
 
   svg {
-    padding: 0 16px;
+    padding: 12px 14px;
   }
-}
-
-.evolution {
-  display: flex;
-  flex-flow: row;
-  align-items: center;
+  
+  .evolution {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 72px;
+    margin: 0 8px;
+    
+    i.material-icons {
+      font-size: 32px;
+      transform: scaleX(-1);
+    }
+    .evolution__candy,
+    .evolution__distance {
+      font-size: 12px;
+      min-height: 14px;
+    }
+  }
 }
