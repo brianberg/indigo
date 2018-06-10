@@ -145,7 +145,7 @@ export class PokedexEntry extends React.Component<any, {}> {
     return (
       <div className="pokedex-entry">
         <div className="pokemon-overview">
-          <div className="pokemon-image">
+          <div className="pokemon-image-container">
             <PokemonImage pokemonId={this.id}/>
           </div>
           <div className="pokemon-info">

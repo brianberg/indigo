@@ -43,20 +43,19 @@
     background-color: #B0BEC5;
     border-radius: 6px;
 
-    .pokemon-image {
+    .pokemon-image-container {
       display: flex;
       flex-flow: row;
       align-content: center;
       align-items: center;
       justify-content: center;
-      margin-top: 32px;
+      margin: 16px 0 8px;
       z-index: 2;
     }
     .pokemon-info {
       @extend .mdc-card;
       flex: 1;
-      margin-top: -16px;
-      padding: 16px;
+      padding: 0 16px 16px;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       

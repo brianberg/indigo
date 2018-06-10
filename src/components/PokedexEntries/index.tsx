@@ -14,6 +14,7 @@ export class PokedexEntries extends React.Component<any, {}> {
     super(props);
     const Pokedex = PokedexService.getInstance();
     this.entries  = Pokedex.getAllEntries();
+    // this.entries  = Pokedex.getAllEntries().slice(0,9);
   }
 
   render() {

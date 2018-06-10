@@ -19,6 +19,7 @@ export class Pokemon extends React.Component<any, {}> {
   name          : string;
   nickname      : string;
   identifier    : string;
+  display       : any;
 
   primaryType   : any;
   secondaryType : any;
@@ -42,6 +43,7 @@ export class Pokemon extends React.Component<any, {}> {
     this.id            = data.pokemon_id;
     this.cp            = data.cp;
     this.nickname      = data.nickname;
+    this.display       = data.pokemon_display;
     
     // IVs
     this.attack        = data.individual_attack;
@@ -73,7 +75,7 @@ export class Pokemon extends React.Component<any, {}> {
           </div>
         </div>
         <div className="pokemon__media">
-          <PokemonImage pokemonId={this.id} />
+          <PokemonImage pokemonId={this.id} pokemonDisplay={this.display}/>
         </div>
         <div className="mdc-card pokemon__content">
           <h2 className="pokemon__content--name mdc-typography--title">
